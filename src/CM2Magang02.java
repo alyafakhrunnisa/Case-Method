@@ -1,3 +1,5 @@
+// link github : https://github.com/alyafakhrunnisa/Case-Method/tree/main/src
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ class Magang {
     int semester;
     String status;
 
-    
+    //
     Magang(String nama, String nim, String prodi, String perusahaan, int semester, String status) {
         this.nama = nama;
         this.nim = nim;
@@ -23,6 +25,7 @@ class Magang {
 
 public class CM2Magang02 {
     static Scanner sc = new Scanner(System.in);
+
     // untuk menyimpan semua data pendaftar
     static ArrayList<Magang> data = new ArrayList<>();
 
@@ -40,6 +43,7 @@ public class CM2Magang02 {
             pilih = sc.nextInt();
             sc.nextLine();
 
+            // switch menu
             switch (pilih) {
                 case 1:
                     tambahData();
@@ -60,7 +64,7 @@ public class CM2Magang02 {
                     System.out.println("Pilihan tidak valid.");
             }
 
-        } while (pilih != 5);
+        } while (pilih != 5); // ulangi sampai pilih 5 jika ingin keluar pilih 5
     }
 
     // function tambah data
@@ -74,6 +78,7 @@ public class CM2Magang02 {
         System.out.print("Perusahaan Tujuan Magang: ");
         String perusahaan = sc.nextLine();
 
+        // validasi semester
         int semester;
         while (true) {
             System.out.print("Semester pengambilan magang (6 atau 7): ");
@@ -83,6 +88,7 @@ public class CM2Magang02 {
             System.out.println("Semester hanya boleh 6 atau 7!");
         }
 
+        // validasi status
         String status;
         while (true) {
             System.out.print("Status magang (Diterima/Menunggu/Ditolak): ");
@@ -92,9 +98,10 @@ public class CM2Magang02 {
                 status.equalsIgnoreCase("Ditolak")) {
                 break;
             }
-            System.out.println("Status tidak valid!");
+            System.out.println("Status tidak valid!"); // ulangi input jika status tidak valid
         }
 
+        // simpan data
         data.add(new Magang(nama, nim, prodi, perusahaan, semester, status));
         System.out.println("Data pendaftaran magang berhasil ditambahkan. Total pendaftar: " + data.size());
     }
@@ -106,9 +113,11 @@ public class CM2Magang02 {
             return;
         }
 
+        // header tabel
         System.out.printf("\n%-3s %-10s %-12s %-20s %-10s %-10s\n",
                 "No", "Nama", "NIM", "Prodi", "Semester", "Status"); 
 
+        // tampil data  
         int no = 1;
         for (Magang m : data) {
             System.out.printf("%-3d %-10s %-12s %-20s %-10d %-10s\n",
@@ -126,9 +135,11 @@ public class CM2Magang02 {
         System.out.print("Masukkan Program Studi: ");
         String cari = sc.nextLine();
 
+        // header tabel
         System.out.printf("\n%-3s %-10s %-12s %-20s %-10s %-10s\n",
                 "No", "Nama", "NIM", "Prodi", "Semester", "Status");
 
+        // tampil data yang sesuai prodi
         int no = 1;
         boolean ada = false;
         for (Magang m : data) {
@@ -139,13 +150,15 @@ public class CM2Magang02 {
             }
         }
 
-        if (!ada) System.out.println("Tidak ada data untuk program studi tersebut.");
+        if (!ada) System.out.println("Tidak ada pendaftar untuk program studi tersebut.");
     }
 
     // function untuk menghitung jumlah status
     static void hitungStatus() {
+        // inisialisasi counter
         int diterima = 0, menunggu = 0, ditolak = 0;
 
+        // hitung status
         for (Magang m : data) {
             if (m.status.equalsIgnoreCase("Diterima")) diterima++;
             else if (m.status.equalsIgnoreCase("Menunggu")) menunggu++;
